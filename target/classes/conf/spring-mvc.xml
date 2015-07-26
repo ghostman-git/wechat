@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 自动扫描包 -->
+	<context:component-scan base-package="org.ghostman.chat.web" />
+	
+	<!-- 静态资源访问 -->
+	<mvc:default-servlet-handler />
+	
+	<!-- 开启注解 -->
+	<mvc:annotation-driven />
+	<!-- 启用切面注解 自动为匹配的类生成代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<!-- 视图分解 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 拦截器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/admin/login.*"/>
+			<mvc:exclude-mapping path="/admin/tologin.*"/>
+			<mvc:exclude-mapping path="/image/**" />
+			<mvc:exclude-mapping path="/js/**" />
+			<mvc:exclude-mapping path="/css/**" />
+			<bean id="privilegeInterceptor" class="com.money.boxadmin.interceptor.PrivilegeInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*/*add*.htm"/>
+			<bean id="repeatSubmitInterceptor" class="com.money.boxadmin.interceptor.RepeatSubmitInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- 上传文件 -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+		p:defaultEncoding="utf-8" p:maxUploadSize="2097152" /> -->
+</beans>
